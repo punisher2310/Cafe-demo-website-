@@ -1,113 +1,241 @@
-import { useState } from "react"; import { motion } from "framer-motion"; import Lottie from "lottie-react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyro Premium Cafe</title>
 
-// 👉 You will replace this JSON with real coffee animation file import coffeeAnimation from "./coffee-animation.json";
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-export default function PremiumCafeDemo() { const [menuOpen, setMenuOpen] = useState(false);
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #111, #000);
+  color: white;
+  overflow-x: hidden;
+}
 
-return ( <div className="bg-gradient-to-br from-black via-neutral-900 to-black text-white min-h-screen font-[Inter] scroll-smooth">
+/* LOADER */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: 'Playfair Display';
+  font-size: 30px;
+}
 
-{/* Navbar */}
-  <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 z-50 backdrop-blur-md bg-white/5">
-    <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">☰</button>
-    <h1 className="text-xl tracking-widest font-[Playfair_Display]">ZYRO DEMO</h1>
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 1.5s ease;
+}
+
+@keyframes fadeUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* GLASS */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 20px;
+}
+
+/* SECTION */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* GALLERY */
+.gallery img {
+  width: 260px;
+  margin: 10px;
+  border-radius: 20px;
+  transition: 0.4s;
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}
+
+/* MENU */
+.menu-item {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding: 12px;
+  max-width: 450px;
+  margin: auto;
+}
+
+.menu-item:hover {
+  color: #f5c16c;
+}
+
+/* BUTTON */
+.btn {
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #f5c16c, #ff8a00);
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* FLOAT */
+.floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.floating button {
+  display: block;
+  margin: 10px 0;
+  padding: 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">Zyro Experience ☕</div>
+
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop>
+    <source src="https://videos.pexels.com/video-files/855385/855385-hd_1920_1080_25fps.mp4">
+  </video>
+
+  <div class="content">
+    <h1>Crafted Coffee Experience</h1>
+    <p>Luxury. Taste. Vibe.</p>
+    <button class="btn" onclick="openModal()">Book a Table</button>
   </div>
-
-  {/* Side Menu */}
-  {menuOpen && (
-    <div className="fixed top-0 left-0 w-64 h-full bg-black/80 backdrop-blur-lg p-6 space-y-6 z-50">
-      <p>Menu</p>
-      <p>Location</p>
-      <p>Book Seat</p>
-      <p>Timings</p>
-    </div>
-  )}
-
-  {/* 🔥 Hero Coffee Animation */}
-  <section className="h-screen flex flex-col justify-center items-center text-center">
-    <div className="w-64 mb-6">
-      <Lottie animationData={coffeeAnimation} loop={true} />
-    </div>
-
-    <h1 className="text-5xl font-[Playfair_Display] mb-4">
-      Crafted Coffee Experience
-    </h1>
-    <p className="opacity-70">Luxury. Taste. Vibe.</p>
-  </section>
-
-  {/* Owner Message */}
-  <section className="p-12 text-center backdrop-blur-md bg-white/5 m-6 rounded-2xl">
-    <h2 className="text-3xl mb-4 font-[Playfair_Display]">A Note from the Owner</h2>
-    <p className="opacity-70 max-w-xl mx-auto">
-      This space is designed for comfort, conversations, and unforgettable coffee moments.
-    </p>
-  </section>
-
-  {/* Gallery */}
-  <section className="grid grid-cols-2 md:grid-cols-3 gap-4 p-6">
-    {[1,2,3,4,5].map((i) => (
-      <motion.img
-        key={i}
-        src={`https://source.unsplash.com/400x400/?cafe,coffee,${i}`}
-        whileHover={{ scale: 1.15 }}
-        className="rounded-2xl cursor-pointer shadow-lg"
-      />
-    ))}
-  </section>
-
-  {/* Favorites */}
-  <section className="p-12">
-    <h2 className="text-3xl mb-6 text-center font-[Playfair_Display]">All Time Favorites</h2>
-    <div className="flex flex-wrap justify-center gap-6">
-      {["Cappuccino", "Cold Coffee", "Espresso", "Mocha"].map((item) => (
-        <motion.div
-          key={item}
-          whileHover={{ scale: 1.1 }}
-          className="p-4 border border-white/20 rounded-xl backdrop-blur-md bg-white/5"
-        >
-          {item}
-        </motion.div>
-      ))}
-    </div>
-  </section>
-
-  {/* Menu Section */}
-  <section className="p-12">
-    <h2 className="text-3xl mb-6 text-center font-[Playfair_Display]">Menu</h2>
-    <div className="max-w-2xl mx-auto space-y-4">
-      {["Cappuccino - ₹120","Latte - ₹140","Cold Coffee - ₹160","Mocha - ₹180"].map((item) => (
-        <div className="flex justify-between border-b border-white/20 pb-2">
-          <span>{item}</span>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  {/* Reviews */}
-  <section className="overflow-hidden whitespace-nowrap py-6">
-    <motion.div
-      animate={{ x: ["100%", "-100%"] }}
-      transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
-      className="text-lg"
-    >
-      ⭐ Amazing coffee! &nbsp;&nbsp; ⭐ Premium vibe! &nbsp;&nbsp; ⭐ Loved it!
-    </motion.div>
-  </section>
-
-  {/* Maps */}
-  <section className="p-6">
-    <iframe
-      className="w-full h-64 rounded-xl"
-      src="https://maps.google.com/maps?q=kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"
-    />
-  </section>
-
-  {/* Floating Buttons (Demo only) */}
-  <div className="fixed bottom-6 right-6 flex flex-col gap-3">
-    <button className="bg-white text-black px-3 py-2 rounded-full">📞</button>
-    <button className="bg-white text-black px-3 py-2 rounded-full">📍</button>
-    <button className="bg-white text-black px-3 py-2 rounded-full">📷</button>
-  </div>
-
 </div>
 
-); }
+<!-- OWNER -->
+<div class="section glass">
+  <h2>A Note from the Owner</h2>
+  <p>Designed for comfort and unforgettable coffee moments.</p>
+</div>
+
+<!-- GALLERY -->
+<div class="section gallery">
+  <h2>Our Vibe</h2>
+  <img src="https://source.unsplash.com/300x300/?cafe">
+  <img src="https://source.unsplash.com/300x300/?coffee">
+  <img src="https://source.unsplash.com/300x300/?espresso">
+</div>
+
+<!-- MENU -->
+<div class="section">
+  <h2>Menu</h2>
+  <div class="menu-item">Cappuccino - ₹120</div>
+  <div class="menu-item">Latte - ₹140</div>
+  <div class="menu-item">Cold Coffee - ₹160</div>
+</div>
+
+<!-- MAP -->
+<div class="section">
+  <h2>Find Us</h2>
+  <iframe width="90%" height="300"
+  src="https://maps.google.com/maps?q=kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+
+<!-- FLOAT -->
+<div class="floating">
+  <button onclick="window.open('https://wa.me/91XXXXXXXXXX')">💬</button>
+  <button>📞</button>
+  <button>📍</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="bookingModal">
+  <div class="modal-content">
+    <h2>Book Your Table</h2>
+    <input placeholder="Your Name"><br>
+    <input placeholder="Date & Time"><br>
+    <button class="btn" onclick="closeModal()">Confirm Booking</button>
+  </div>
+</div>
+
+<script>
+// loader
+window.onload = () => {
+  document.getElementById('loader').style.display = 'none';
+};
+
+// modal
+function openModal() {
+  document.getElementById('bookingModal').style.display = 'flex';
+}
+function closeModal() {
+  alert('Booking request sent!');
+  document.getElementById('bookingModal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
