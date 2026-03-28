@@ -1,296 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zyro Premium Cafe</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zyro Premium Experience</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --gold:#f5c16c;
   --bg:#0b0b0c;
+  --card:#141416;
+  --accent:#e6b17e;
 }
-*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:radial-gradient(circle at top,#121212,#000);
-  color:#fff;
+  background:var(--bg);
+  color:#eee;
   scroll-behavior:smooth;
 }
-h1,h2{font-family:'Playfair Display',serif; letter-spacing:.5px}
 
-/* ===== Loader (coffee intro) ===== */
+h1,h2{
+  font-family:'Playfair Display',serif;
+}
+
+/* ===== LOADER ===== */
 #loader{
-  position:fixed; inset:0; z-index:9999;
-  display:flex; align-items:center; justify-content:center;
-  background:#000;
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  animation:fadeOut 1s ease 2s forwards;
 }
 #loader video{
-  width:100%; height:100%; object-fit:cover; opacity:.9;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+@keyframes fadeOut{
+  to{opacity:0; visibility:hidden;}
 }
 
-/* ===== Navbar + Hamburger ===== */
+/* ===== NAV ===== */
 .nav{
-  position:fixed; top:16px; left:16px; z-index:1000;
-  font-size:28px; cursor:pointer; background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px); border-radius:12px; padding:8px 12px;
+  position:fixed;
+  top:20px;
+  left:20px;
+  z-index:1000;
+  cursor:pointer;
+  font-size:28px;
 }
 
-/* ===== Side Panel ===== */
-.panel{
-  position:fixed; top:0; left:-280px; width:260px; height:100%;
-  background:rgba(10,10,10,.95); backdrop-filter:blur(14px);
-  padding:24px; transition:.4s; z-index:999;
+/* MENU DROPDOWN */
+.menu-box{
+  position:absolute;
+  top:60px;
+  left:0;
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  display:none;
+  animation:slideDown 0.3s ease;
 }
-.panel.open{ left:0 }
-.panel a{
-  display:block; margin:16px 0; text-decoration:none; color:#fff; opacity:.9
+@keyframes slideDown{
+  from{opacity:0; transform:translateY(-10px)}
+  to{opacity:1; transform:translateY(0)}
 }
 
-/* ===== Hero ===== */
+.menu-box a{
+  display:block;
+  margin:10px 0;
+  text-decoration:none;
+  color:white;
+}
+
+/* ===== HERO ===== */
 .hero{
-  height:100vh; position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:linear-gradient(to bottom,#111,#000);
 }
-.hero video{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.35;
-}
-.hero .content{ position:relative; z-index:2 }
-.btn{
-  padding:12px 24px; border:none; border-radius:30px;
-  background:linear-gradient(45deg,var(--gold),#ff8a00);
-  color:#000; font-weight:600; cursor:pointer;
-}
-
-/* ===== Sections ===== */
-.section{ padding:80px 20px; text-align:center }
-.glass{
-  background:rgba(255,255,255,.05);
-  backdrop-filter:blur(12px);
-  border-radius:20px; padding:28px; margin:20px auto; max-width:900px;
+.hero h1{
+  font-size:48px;
 }
 
-/* ===== Gallery ===== */
-.gallery{ display:flex; flex-wrap:wrap; justify-content:center }
+/* ===== SECTION ===== */
+.section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+/* ===== GALLERY ===== */
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 .gallery img{
-  width:240px; height:240px; object-fit:cover; margin:10px;
-  border-radius:18px; transition:.4s;
+  width:250px;
+  margin:10px;
+  border-radius:15px;
+  transition:0.4s;
 }
-.gallery img:hover{ transform:scale(1.18) }
-
-/* ===== Favorites (stagger) ===== */
-.fav span{
-  display:block; opacity:0; transform:translateY(20px);
-  animation:rise 8s infinite;
-}
-.fav span:nth-child(2){ animation-delay:2s }
-.fav span:nth-child(3){ animation-delay:4s }
-@keyframes rise{
-  0%{opacity:0; transform:translateY(20px)}
-  20%{opacity:1; transform:translateY(0)}
-  80%{opacity:1}
-  100%{opacity:0}
+.gallery img:hover{
+  transform:scale(1.2);
+  filter:brightness(1.2);
 }
 
-/* ===== Menu (Zomato style cards) ===== */
-.menu{ max-width:900px; margin:auto }
-.item{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:14px 0; border-bottom:1px solid rgba(255,255,255,.15);
+/* ===== MENU ===== */
+.menu-item{
+  background:var(--card);
+  padding:15px;
+  margin:10px auto;
+  max-width:500px;
+  border-radius:10px;
+  transition:0.3s;
 }
-.item .meta{ text-align:left }
-.price{ color:var(--gold); font-weight:600 }
-.add{
-  background:transparent; border:1px solid var(--gold);
-  color:var(--gold); border-radius:20px; padding:6px 14px; cursor:pointer;
+.menu-item:hover{
+  transform:translateY(-5px);
 }
 
-/* ===== Reviews auto-scroll ===== */
-.reviews{ overflow:hidden; white-space:nowrap }
+/* ===== REVIEWS ===== */
+.reviews{
+  overflow:hidden;
+  white-space:nowrap;
+}
 .reviews span{
-  display:inline-block; padding:0 24px; font-size:16px;
-  animation:marq 18s linear infinite;
+  display:inline-block;
+  padding:0 30px;
+  animation:scroll 18s linear infinite;
 }
-@keyframes marq{
-  from{ transform:translateX(100%) }
-  to{ transform:translateX(-100%) }
+@keyframes scroll{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-100%)}
 }
 
-/* ===== Insta grid ===== */
-.insta{ display:flex; flex-wrap:wrap; justify-content:center }
-.insta img{ width:180px; height:180px; object-fit:cover; margin:6px; border-radius:12px }
-
-/* ===== Floating actions ===== */
+/* ===== FLOAT ===== */
 .float{
-  position:fixed; right:16px; bottom:16px; z-index:999;
+  position:fixed;
+  bottom:20px;
+  right:20px;
 }
-.float button{
-  display:block; margin:10px 0; padding:14px; border:none; border-radius:50%;
-  background:rgba(255,255,255,.9); cursor:pointer;
+.float a{
+  display:block;
+  margin:10px 0;
+  padding:14px;
+  border-radius:50%;
+  background:white;
+  text-align:center;
+  text-decoration:none;
 }
 
-/* ===== Cart (fake order) ===== */
-.cart{
-  position:fixed; right:-320px; top:0; width:300px; height:100%;
-  background:#111; padding:20px; transition:.4s; z-index:1000;
+/* ===== REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.6s;
 }
-.cart.open{ right:0 }
-.cart h3{ margin-top:0 }
-
-/* ===== Map ===== */
-iframe{ border:0; border-radius:16px }
-
-/* ===== Simple reveal ===== */
-.reveal{ opacity:0; transform:translateY(30px); transition:.6s }
-.reveal.show{ opacity:1; transform:translateY(0) }
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
 </style>
 </head>
 
 <body>
 
-<!-- Loader (coffee pouring style intro) -->
+<!-- LOADER -->
 <div id="loader">
-  <video autoplay muted playsinline>
+  <video autoplay muted>
     <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_25fps.mp4">
   </video>
 </div>
 
-<!-- Nav -->
-<div class="nav" onclick="togglePanel()">☰</div>
-
-<!-- Side Panel -->
-<div id="panel" class="panel">
-  <a href="#menu">Menu</a>
-  <a href="#map">Location</a>
-  <a href="#booking">Book Seat</a>
-  <a href="#">Timings: 10AM–11PM</a>
+<!-- NAV -->
+<div class="nav" onclick="toggleMenu()">☰
+  <div class="menu-box" id="menu">
+    <a href="#menuSec">Menu</a>
+    <a href="#map">Location</a>
+    <a href="#">Book Seat</a>
+    <a href="#">Timings: 10AM–11PM</a>
+  </div>
 </div>
 
-<!-- Hero -->
-<section class="hero">
-  <video autoplay muted loop>
-    <source src="https://videos.pexels.com/video-files/3129977/3129977-hd_1920_1080_25fps.mp4">
-  </video>
-  <div class="content">
+<!-- HERO -->
+<div class="hero">
+  <div>
     <h1>Luxury Coffee Experience</h1>
-    <p>Where every sip feels premium</p>
-    <button class="btn" onclick="alert('Demo Booking Opened')">Book Table</button>
+    <p>Minimal. Elegant. Premium.</p>
   </div>
-</section>
-
-<!-- Owner -->
-<section class="section glass reveal">
-  <h2>Message from the Owner</h2>
-  <p>“We don’t just serve coffee — we create a space where every moment feels special.”</p>
-</section>
-
-<!-- Favorites -->
-<section class="section glass fav reveal">
-  <h2>Customer Favorites</h2>
-  <span>☕ Cappuccino — rich & smooth</span>
-  <span>🍫 Mocha — chocolate love</span>
-  <span>❄ Cold Coffee — chilled vibes</span>
-</section>
-
-<!-- Gallery -->
-<section class="section reveal">
-  <h2>Our Vibe</h2>
-  <div class="gallery">
-    <img src="https://source.unsplash.com/300x300/?cafe">
-    <img src="https://source.unsplash.com/300x300/?coffee">
-    <img src="https://source.unsplash.com/300x300/?latte">
-    <img src="https://source.unsplash.com/300x300/?dessert">
-  </div>
-</section>
-
-<!-- Menu -->
-<section id="menu" class="section glass reveal">
-  <h2>Menu</h2>
-  <div class="menu">
-    <div class="item">
-      <div class="meta"><strong>Cappuccino</strong><br><small>Espresso + foam</small></div>
-      <div><span class="price">₹120</span> <button class="add" onclick="addItem('Cappuccino')">Add</button></div>
-    </div>
-    <div class="item">
-      <div class="meta"><strong>Latte</strong><br><small>Smooth milk coffee</small></div>
-      <div><span class="price">₹140</span> <button class="add" onclick="addItem('Latte')">Add</button></div>
-    </div>
-    <div class="item">
-      <div class="meta"><strong>Cold Coffee</strong><br><small>Chilled refreshment</small></div>
-      <div><span class="price">₹160</span> <button class="add" onclick="addItem('Cold Coffee')">Add</button></div>
-    </div>
-  </div>
-</section>
-
-<!-- Reviews -->
-<section class="section reveal">
-  <h2>What Customers Say</h2>
-  <div class="reviews">
-    <span>⭐ Amazing vibe</span>
-    <span>⭐ Loved the coffee</span>
-    <span>⭐ Best ambience</span>
-  </div>
-</section>
-
-<!-- Instagram -->
-<section class="section reveal">
-  <h2>Instagram</h2>
-  <div class="insta">
-    <img src="https://source.unsplash.com/200x200/?coffee">
-    <img src="https://source.unsplash.com/200x200/?cafe">
-    <img src="https://source.unsplash.com/200x200/?latte">
-  </div>
-</section>
-
-<!-- Map -->
-<section id="map" class="section reveal">
-  <h2>Visit Us</h2>
-  <iframe width="90%" height="300"
-    src="https://maps.google.com/maps?q=kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
-</section>
-
-<!-- Floating -->
-<div class="float">
-  <button onclick="window.open('https://wa.me/91XXXXXXXXXX')">💬</button>
-  <button>📞</button>
-  <button>📍</button>
-  <button>📷</button>
-  <button onclick="toggleCart()">🛒</button>
 </div>
 
-<!-- Cart -->
-<div id="cart" class="cart">
-  <h3>Your Order</h3>
-  <div id="items"></div>
+<!-- OWNER -->
+<div class="section reveal">
+  <h2>Message from Owner</h2>
+  <p>We craft experiences, not just coffee.</p>
+</div>
+
+<!-- GALLERY -->
+<div class="section gallery reveal">
+  <h2>Our Vibe</h2>
+  <img src="https://source.unsplash.com/300x300/?cafe">
+  <img src="https://source.unsplash.com/300x300/?coffee">
+  <img src="https://source.unsplash.com/300x300/?latte">
+</div>
+
+<!-- MENU -->
+<div class="section reveal" id="menuSec">
+  <h2>Menu</h2>
+  <div class="menu-item">Cappuccino — ₹120</div>
+  <div class="menu-item">Latte — ₹140</div>
+  <div class="menu-item">Cold Coffee — ₹160</div>
+</div>
+
+<!-- REVIEWS -->
+<div class="section reveal">
+  <h2>Reviews</h2>
+  <div class="reviews">
+    <span>⭐ Amazing experience</span>
+    <span>⭐ Premium vibes</span>
+    <span>⭐ Loved it</span>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="section reveal" id="map">
+  <iframe width="90%" height="300"
+  src="https://maps.google.com/maps?q=kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</div>
+
+<!-- FLOAT -->
+<div class="float">
+  <a href="https://wa.me/91XXXXXXXXXX">💬</a>
+  <a href="tel:XXXXXXXXXX">📞</a>
+  <a href="https://maps.google.com">📍</a>
+  <a href="https://instagram.com">📷</a>
 </div>
 
 <script>
-// loader
-setTimeout(()=>{document.getElementById('loader').style.display='none'},2000)
-
-// panel
-function togglePanel(){
-  document.getElementById('panel').classList.toggle('open')
+function toggleMenu(){
+  let m=document.getElementById('menu');
+  m.style.display = (m.style.display==="block")?"none":"block";
 }
 
-// cart
-function toggleCart(){
-  document.getElementById('cart').classList.toggle('open')
-}
-function addItem(name){
-  document.getElementById('items').innerHTML += "<p>"+name+"</p>"
-}
-
-// reveal
 window.addEventListener('scroll',()=>{
   document.querySelectorAll('.reveal').forEach(el=>{
     if(el.getBoundingClientRect().top < window.innerHeight-80){
       el.classList.add('show')
     }
   })
-})
+});
 </script>
 
 </body>
