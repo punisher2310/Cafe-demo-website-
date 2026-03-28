@@ -1,0 +1,113 @@
+import { useState } from "react"; import { motion } from "framer-motion"; import Lottie from "lottie-react";
+
+// 👉 You will replace this JSON with real coffee animation file import coffeeAnimation from "./coffee-animation.json";
+
+export default function PremiumCafeDemo() { const [menuOpen, setMenuOpen] = useState(false);
+
+return ( <div className="bg-gradient-to-br from-black via-neutral-900 to-black text-white min-h-screen font-[Inter] scroll-smooth">
+
+{/* Navbar */}
+  <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 z-50 backdrop-blur-md bg-white/5">
+    <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">☰</button>
+    <h1 className="text-xl tracking-widest font-[Playfair_Display]">ZYRO DEMO</h1>
+  </div>
+
+  {/* Side Menu */}
+  {menuOpen && (
+    <div className="fixed top-0 left-0 w-64 h-full bg-black/80 backdrop-blur-lg p-6 space-y-6 z-50">
+      <p>Menu</p>
+      <p>Location</p>
+      <p>Book Seat</p>
+      <p>Timings</p>
+    </div>
+  )}
+
+  {/* 🔥 Hero Coffee Animation */}
+  <section className="h-screen flex flex-col justify-center items-center text-center">
+    <div className="w-64 mb-6">
+      <Lottie animationData={coffeeAnimation} loop={true} />
+    </div>
+
+    <h1 className="text-5xl font-[Playfair_Display] mb-4">
+      Crafted Coffee Experience
+    </h1>
+    <p className="opacity-70">Luxury. Taste. Vibe.</p>
+  </section>
+
+  {/* Owner Message */}
+  <section className="p-12 text-center backdrop-blur-md bg-white/5 m-6 rounded-2xl">
+    <h2 className="text-3xl mb-4 font-[Playfair_Display]">A Note from the Owner</h2>
+    <p className="opacity-70 max-w-xl mx-auto">
+      This space is designed for comfort, conversations, and unforgettable coffee moments.
+    </p>
+  </section>
+
+  {/* Gallery */}
+  <section className="grid grid-cols-2 md:grid-cols-3 gap-4 p-6">
+    {[1,2,3,4,5].map((i) => (
+      <motion.img
+        key={i}
+        src={`https://source.unsplash.com/400x400/?cafe,coffee,${i}`}
+        whileHover={{ scale: 1.15 }}
+        className="rounded-2xl cursor-pointer shadow-lg"
+      />
+    ))}
+  </section>
+
+  {/* Favorites */}
+  <section className="p-12">
+    <h2 className="text-3xl mb-6 text-center font-[Playfair_Display]">All Time Favorites</h2>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["Cappuccino", "Cold Coffee", "Espresso", "Mocha"].map((item) => (
+        <motion.div
+          key={item}
+          whileHover={{ scale: 1.1 }}
+          className="p-4 border border-white/20 rounded-xl backdrop-blur-md bg-white/5"
+        >
+          {item}
+        </motion.div>
+      ))}
+    </div>
+  </section>
+
+  {/* Menu Section */}
+  <section className="p-12">
+    <h2 className="text-3xl mb-6 text-center font-[Playfair_Display]">Menu</h2>
+    <div className="max-w-2xl mx-auto space-y-4">
+      {["Cappuccino - ₹120","Latte - ₹140","Cold Coffee - ₹160","Mocha - ₹180"].map((item) => (
+        <div className="flex justify-between border-b border-white/20 pb-2">
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* Reviews */}
+  <section className="overflow-hidden whitespace-nowrap py-6">
+    <motion.div
+      animate={{ x: ["100%", "-100%"] }}
+      transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+      className="text-lg"
+    >
+      ⭐ Amazing coffee! &nbsp;&nbsp; ⭐ Premium vibe! &nbsp;&nbsp; ⭐ Loved it!
+    </motion.div>
+  </section>
+
+  {/* Maps */}
+  <section className="p-6">
+    <iframe
+      className="w-full h-64 rounded-xl"
+      src="https://maps.google.com/maps?q=kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    />
+  </section>
+
+  {/* Floating Buttons (Demo only) */}
+  <div className="fixed bottom-6 right-6 flex flex-col gap-3">
+    <button className="bg-white text-black px-3 py-2 rounded-full">📞</button>
+    <button className="bg-white text-black px-3 py-2 rounded-full">📍</button>
+    <button className="bg-white text-black px-3 py-2 rounded-full">📷</button>
+  </div>
+
+</div>
+
+); }
